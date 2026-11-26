@@ -1,0 +1,17 @@
+.bx-ui-icon {
+  display: inline-block;
+  flex: 0 0 auto;
+  font-size: 1.15em;
+  line-height: 1;
+  vertical-align: -0.12em;
+}
+
+.social-icon {
+  font-size: 1.2em;
+}
+
+.icon-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}

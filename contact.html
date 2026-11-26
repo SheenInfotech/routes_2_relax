@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f5ef">
+  <meta name="description" content="Contact Routes 2 Relax to enquire about Kashmir tour packages, availability and custom itineraries.">
+  <title>Contact Routes 2 Relax — Plan Your Kashmir Trip</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/floating-contact.css">
+  <link rel="stylesheet" href="assets/icons.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css">
+  <link rel="stylesheet" href="assets/boxicons.css">
+  <style>
+    :root {
+      --ink: #173b39;
+      --deep: #102c2a;
+      --green: #245c53;
+      --cream: #f6f5ef;
+      --paper: #fffefa;
+      --muted: #647773;
+      --line: #e1e7df;
+      --gold: #e4b54e;
+      --serif: "Playfair Display", Georgia, serif;
+      --sans: "DM Sans", Arial, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--cream); color: var(--ink); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-decoration: none; }
+    button, input, select, textarea { font: inherit; }
+    .wrap { width: min(1120px, calc(100% - 40px)); margin-inline: auto; }
+    .announcement { padding: 9px 16px; background: var(--deep); color: white; text-align: center; font-size: 11px; letter-spacing: .04em; }
+    .announcement strong { color: #f2ce78; }
+    .site-header { position: sticky; z-index: 5; top: 0; border-bottom: 1px solid #173b3912; background: #f6f5eff2; backdrop-filter: blur(12px); }
+    .nav { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand img { display: block; width: 112px; height: 72px; border-radius: 4px; background: white; object-fit: contain; }
+    .nav-links { display: flex; align-items: center; gap: clamp(16px, 3vw, 34px); }
+    .nav-links a { color: #415e59; font-size: 12px; font-weight: 600; }
+    .nav-links a:hover, .footer-links a:hover { color: #a56d18; }
+    .button { display: inline-flex; min-height: 44px; align-items: center; justify-content: center; gap: 8px; padding: 0 18px; border: 1px solid transparent; border-radius: 999px; background: var(--green); color: white; font-size: 12px; font-weight: 700; cursor: pointer; transition: background .2s, transform .2s; }
+    .button:hover { transform: translateY(-2px); background: var(--deep); }
+    .button-gold { background: var(--gold); color: var(--deep); }
+    .button-gold:hover { background: var(--deep); color: white; }
+    .button-outline { border-color: #b7c8bc; background: transparent; color: var(--ink); }
+    .button-outline:hover { color: white; }
+    .page-hero { position: relative; overflow: hidden; padding: 67px 0 72px; background: linear-gradient(90deg, #102c2adf, #102c2a70), url("https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1800&q=85") center 48% / cover; color: white; }
+    .eyebrow { color: #bb8a2c; font-size: 10px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+    .page-hero .eyebrow { color: #f2ce78; }
+    .page-hero h1 { margin: 10px 0; font-family: var(--serif); font-size: clamp(42px, 7vw, 68px); letter-spacing: -.035em; line-height: 1.05; }
+    .page-hero p:last-child { max-width: 580px; margin: 0; color: #f2f4ec; font-size: 14px; line-height: 1.8; }
+    .contact-layout { display: grid; grid-template-columns: .85fr 1.15fr; gap: 24px; align-items: start; padding: 58px 0 72px; }
+    .contact-info, .form-card { padding: clamp(22px, 3vw, 34px); border: 1px solid var(--line); border-radius: 11px; background: var(--paper); box-shadow: 0 14px 32px #173b3909; }
+    .contact-info { background: #eaf0e9; }
+    .contact-info h2, .form-card h2 { margin: 7px 0 9px; font-family: var(--serif); font-size: 30px; letter-spacing: -.02em; }
+    .contact-info > p, .form-intro { margin: 0 0 22px; color: var(--muted); font-size: 12px; line-height: 1.75; }
+    .contact-method { display: grid; grid-template-columns: 35px 1fr; gap: 12px; padding: 15px 0; border-top: 1px solid #cbd9ce; }
+    .contact-icon { display: grid; width: 34px; height: 34px; place-items: center; border-radius: 50%; background: white; color: var(--green); font-size: 15px; }
+    .contact-method strong { display: block; margin-bottom: 4px; font-size: 11px; }
+    .contact-method a, .contact-method address { color: #49645d; font-size: 11px; line-height: 1.7; font-style: normal; overflow-wrap: anywhere; }
+    .contact-method a:hover { text-decoration: underline; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+    .field { display: flex; min-width: 0; flex-direction: column; gap: 7px; }
+    .field.full { grid-column: 1 / -1; }
+    .field label { color: #415e59; font-size: 11px; font-weight: 700; }
+    .field input, .field select, .field textarea { width: 100%; min-height: 43px; padding: 10px 12px; border: 1px solid #d2dbd4; border-radius: 5px; outline: none; background: white; color: var(--ink); font-size: 12px; }
+    .field textarea { min-height: 108px; resize: vertical; }
+    .field input:focus, .field select:focus, .field textarea:focus { border-color: #588277; box-shadow: 0 0 0 3px #245c5315; }
+    .submit-row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 18px; }
+    .submit-row button { min-width: 200px; }
+    .form-note { margin: 13px 0 0; color: #77877f; font-size: 10px; line-height: 1.6; }
+    .contact-more { display: flex; align-items: center; justify-content: space-between; gap: 18px; margin-bottom: 65px; padding: 25px 30px; border-radius: 10px; background: var(--deep); color: white; }
+    .contact-more h2 { margin: 0 0 5px; font-family: var(--serif); font-size: 25px; }
+    .contact-more p { margin: 0; color: #ccdad0; font-size: 11px; line-height: 1.7; }
+    footer { padding: 28px 0; background: var(--deep); color: #d2dcd4; }
+    .footer-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; font-size: 11px; }
+    .footer-logo { display: block; width: 94px; height: 62px; background: white; object-fit: contain; }
+    .footer-links { display: flex; flex-wrap: wrap; gap: 18px; }
+    .footer-links a:hover { color: #f2ce78; }
+    @media (max-width: 760px) {
+      .wrap { width: calc(100% - 32px); }
+      .nav { min-height: 66px; flex-wrap: wrap; gap: 7px; }
+      .brand img { width: 92px; height: 62px; }
+      .nav-links { min-width: 0; flex: 1 1 0; flex-wrap: wrap; justify-content: center; gap: 8px; }
+      .nav-links a { font-size: 10px; }
+      .nav > .button { min-height: 38px; padding-inline: 12px; font-size: 10px; }
+      .nav > .button:not(.auth-link) { display: none; }
+      .page-hero { padding: 55px 0; }
+      .contact-layout { grid-template-columns: 1fr; gap: 16px; padding: 38px 0 52px; }
+      .contact-more { align-items: flex-start; flex-direction: column; margin-bottom: 44px; padding: 25px 22px; }
+      .footer-row { align-items: flex-start; flex-direction: column; }
+    }
+    @media (max-width: 420px) {
+      .announcement { font-size: 9px; }
+      .nav { gap: 7px; }
+      .nav-links { gap: 8px; }
+      .nav-links a { font-size: 9px; }
+      .nav > .button { padding-inline: 9px; font-size: 9px; }
+      .form-grid { grid-template-columns: 1fr; gap: 13px; }
+      .field.full { grid-column: auto; }
+      .submit-row button { width: 100%; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  </style>
+  <link rel="stylesheet" href="assets/modern-ui.css">
+</head>
+<body>
+  <div class="announcement">A little more wonder, a little less planning. <strong>Your Kashmir escape starts here.</strong></div>
+  <header class="site-header">
+    <div class="wrap nav">
+      <a class="brand" href="index.html#home" aria-label="Routes 2 Relax home"><img src="assets/brand-mark.png" alt="Routes 2 Relax — Tours and Travels"></a>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="index.html#home">Home</a>
+        <a href="packages.html">Packages</a>
+        <a href="about.html">About</a>
+        <a href="contact.html" aria-current="page">Contact</a>
+      </nav>
+      <a class="button auth-link" data-auth-trigger href="index.html#login">Login</a>
+      <a class="button" href="packages.html">View packages <svg class="site-icon site-icon--arrow" aria-hidden="true" focusable="false"><use href="assets/icons.svg#arrow-up-right"></use></svg></a>
+    </div>
+  </header>
+  <main>
+    <section class="page-hero">
+      <div class="wrap">
+        <p class="eyebrow">We’re here to help you plan</p>
+        <h1>Let’s talk Kashmir.</h1>
+        <p>Ask us about package availability, the day-by-day plan or a trip shaped around your dates and group.</p>
+      </div>
+    </section>
+    <section class="wrap contact-layout">
+      <aside class="contact-info" aria-labelledby="contact-details-heading">
+        <p class="eyebrow">Get in touch</p>
+        <h2 id="contact-details-heading">Talk to our team.</h2>
+        <p>Reach out directly or send your trip details using the form. We’ll use them to understand what you’re looking for.</p>
+        <div class="contact-method">
+          <span class="contact-icon" aria-hidden="true"><i class="bx bx-phone bx-ui-icon" aria-hidden="true"></i></span>
+          <div><strong>Call or WhatsApp</strong><a href="tel:+919596261463">+91 95962 61463</a><br><a href="tel:+916005747546">+91 60057 47546</a></div>
+        </div>
+        <div class="contact-method">
+          <span class="contact-icon" aria-hidden="true"><i class="bx bx-envelope bx-ui-icon" aria-hidden="true"></i></span>
+          <div><strong>Email</strong><a href="mailto:info@routestorelax.in">info@routestorelax.in</a><br><a href="mailto:routestorelax@gmail.com">routestorelax@gmail.com</a></div>
+        </div>
+        <div class="contact-method">
+          <span class="contact-icon" aria-hidden="true"><i class="bx bx-map bx-ui-icon" aria-hidden="true"></i></span>
+          <div><strong>Office</strong><address>Wani Complex, Mirwaiz Lane,<br>Hazratbal, Srinagar - 190006</address></div>
+        </div>
+      </aside>
+      <section class="form-card" aria-labelledby="enquiry-heading">
+        <p class="eyebrow">Plan your trip</p>
+        <h2 id="enquiry-heading">Send an enquiry</h2>
+        <p class="form-intro">Fill in what you know so far, then choose WhatsApp or email. You can review your message before sending.</p>
+        <form id="contact-form">
+          <div class="form-grid">
+            <div class="field">
+              <label for="name">Your name *</label>
+              <input id="name" name="name" autocomplete="name" required>
+            </div>
+            <div class="field">
+              <label for="phone"><i class="bx bx-phone bx-ui-icon" aria-hidden="true"></i> Phone number *</label>
+              <input id="phone" name="phone" type="tel" autocomplete="tel" required>
+            </div>
+            <div class="field">
+              <label for="package">Package or trip</label>
+              <select id="package" name="package">
+                <option value="Not sure yet">Not sure yet</option>
+                <option value="3 nights / 4 days — ₹20,000 for two">3 nights / 4 days — ₹20,000 for two</option>
+                <option value="4 nights / 5 days — ₹35,000 per couple">4 nights / 5 days — ₹35,000 per couple</option>
+                <option value="Kashmir getaway — Srinagar, Gulmarg, Pahalgam and Sonamarg, ₹28,000 per couple">Kashmir getaway — 5 nights / 6 days, ₹28,000 per couple</option>
+                <option value="Kashmir group tour — 5 people, ₹60,000 total">Kashmir group tour — 5 people, ₹60,000 total</option>
+                <option value="Girls-only Keran Valley trip — custom quote">Girls-only Keran Valley trip — custom quote</option>
+                <option value="Custom Kashmir itinerary">Custom Kashmir itinerary</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="travel-date">Preferred travel date</label>
+              <input id="travel-date" name="travel-date" type="date">
+            </div>
+            <div class="field full">
+              <label for="message">Anything else we should know?</label>
+              <textarea id="message" name="message" placeholder="Travellers, trip length, places you’d like to visit…"></textarea>
+            </div>
+          </div>
+          <div class="submit-row">
+            <button class="button button-gold" type="submit" value="whatsapp">Continue to WhatsApp <i class="bx bxl-whatsapp bx-ui-icon" aria-hidden="true"></i><svg class="site-icon site-icon--arrow" aria-hidden="true" focusable="false"><use href="assets/icons.svg#arrow-up-right"></use></svg></button>
+            <button class="button button-outline" type="submit" value="email">Continue to email <i class="bx bx-envelope bx-ui-icon" aria-hidden="true"></i><svg class="site-icon site-icon--arrow" aria-hidden="true" focusable="false"><use href="assets/icons.svg#arrow-up-right"></use></svg></button>
+          </div>
+          <p class="form-note">Your details are included only in the message you choose to send. This website does not submit form data to a server.</p>
+        </form>
+      </section>
+    </section>
+    <section class="wrap contact-more">
+      <div><h2>Still choosing your route?</h2><p>Explore the packages and sample itineraries before you get in touch.</p></div>
+      <a class="button button-gold" href="packages.html">Browse Kashmir packages <svg class="site-icon site-icon--arrow" aria-hidden="true" focusable="false"><use href="assets/icons.svg#arrow-up-right"></use></svg></a>
+    </section>
+  </main>
+  <footer>
+    <div class="wrap footer-row">
+      <a href="index.html#home" aria-label="Routes 2 Relax home"><img class="footer-logo" src="assets/brand-mark.png" alt="Routes 2 Relax"></a>
+      <nav class="footer-links" aria-label="Footer navigation">
+        <a href="index.html#home">Home</a><a href="index.html#reviews">Customer reviews</a><a href="packages.html">Packages</a><a href="about.html">About</a><a href="contact.html">Contact</a>
+        <a class="icon-link" href="https://www.instagram.com/routes_2_relax_kashmir" target="_blank" rel="noopener noreferrer" aria-label="Follow Routes 2 Relax on Instagram"><i class="bx bxl-instagram bx-ui-icon social-icon" aria-hidden="true"></i>Instagram</a>
+        <a class="icon-link" href="https://www.facebook.com/Routes2Relax" target="_blank" rel="noopener noreferrer" aria-label="Follow Routes 2 Relax on Facebook"><i class="bx bxl-facebook-circle bx-ui-icon social-icon" aria-hidden="true"></i>Facebook</a>
+        <a class="icon-link" href="https://www.youtube.com/Routes2Relax" target="_blank" rel="noopener noreferrer" aria-label="Watch Routes 2 Relax on YouTube"><i class="bx bxl-youtube bx-ui-icon social-icon" aria-hidden="true"></i>YouTube</a>
+      </nav>
+      <span>© <span id="year"></span> Routes 2 Relax</span>
+    </div>
+  </footer>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+    document.getElementById("contact-form").addEventListener("submit", function (event) {
+      event.preventDefault();
+      var formData = new FormData(event.currentTarget);
+      var fields = [
+        "Hello Routes 2 Relax, I would like to enquire about a Kashmir trip.",
+        "Name: " + formData.get("name"),
+        "Phone: " + formData.get("phone"),
+        "Package: " + formData.get("package"),
+        "Preferred travel date: " + (formData.get("travel-date") || "Not specified"),
+        "Details: " + (formData.get("message") || "None")
+      ];
+      var message = fields.join("\n");
+      if (event.submitter && event.submitter.value === "email") {
+        window.location.href = "mailto:info@routestorelax.in?subject=Kashmir%20trip%20enquiry&body=" + encodeURIComponent(message);
+        return;
+      }
+      window.open("https://wa.me/919596261463?text=" + encodeURIComponent(message), "_blank", "noopener,noreferrer");
+    });
+  </script>
+  <div class="r2r-floating-contact" aria-label="Quick contact">
+    <a class="r2r-floating-contact__button r2r-floating-contact__button--chat" href="https://wa.me/919596261463?text=Hello%20Routes%202%20Relax%2C%20I%20would%20like%20to%20chat%20about%20a%20Kashmir%20trip." target="_blank" rel="noopener noreferrer" aria-label="Start a live chat on WhatsApp">
+      <span class="r2r-floating-contact__icon" aria-hidden="true"><i class="bx bxl-whatsapp bx-ui-icon" aria-hidden="true"></i></span><span>Live chat</span>
+    </a>
+    <button class="r2r-floating-contact__button r2r-floating-contact__button--callback r2r-callback-open" type="button" aria-haspopup="dialog" aria-controls="r2r-callback-dialog">
+      <span class="r2r-floating-contact__icon" aria-hidden="true"><i class="bx bx-phone bx-ui-icon" aria-hidden="true"></i></span><span>Get a callback</span>
+    </button>
+  </div>
+  <dialog class="r2r-callback-dialog" id="r2r-callback-dialog" aria-labelledby="r2r-callback-title" aria-describedby="r2r-callback-description">
+    <button class="r2r-callback-dialog__close" type="button" aria-label="Close callback form"><svg class="site-icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#close"></use></svg></button>
+    <p class="r2r-callback-dialog__eyebrow">Talk to our team</p>
+    <h2 id="r2r-callback-title">Get a callback</h2>
+    <p class="r2r-callback-dialog__intro" id="r2r-callback-description">Share your number and we’ll prepare a callback request for you to send on WhatsApp.</p>
+    <form class="r2r-callback-form" id="r2r-callback-form">
+      <div class="r2r-callback-form__field">
+        <label for="r2r-callback-name">Your name *</label>
+        <input id="r2r-callback-name" name="name" autocomplete="name" required>
+      </div>
+      <div class="r2r-callback-form__field">
+        <label for="r2r-callback-phone"><i class="bx bx-phone bx-ui-icon" aria-hidden="true"></i> Phone number *</label>
+        <input id="r2r-callback-phone" name="phone" type="tel" autocomplete="tel" required>
+      </div>
+      <div class="r2r-callback-form__field">
+        <label for="r2r-callback-time">Best time to call</label>
+        <select id="r2r-callback-time" name="call-time">
+          <option value="Any time">Any time</option>
+          <option value="Morning">Morning</option>
+          <option value="Afternoon">Afternoon</option>
+          <option value="Evening">Evening</option>
+        </select>
+      </div>
+      <div class="r2r-callback-form__field">
+        <label for="r2r-callback-trip">Package or destination (optional)</label>
+        <input id="r2r-callback-trip" name="trip" placeholder="e.g. Kashmir group tour">
+      </div>
+      <button class="r2r-callback-form__submit" type="submit">Continue to WhatsApp</button>
+    </form>
+    <p class="r2r-callback-dialog__note">WhatsApp opens with your request for review. Your details are shared only if you send the message.</p>
+  </dialog>
+  <script src="assets/floating-contact.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+  <script src="assets/supabase-config.js" defer></script>
+  <script src="assets/auth.js" defer></script>
+</body>
+</html>

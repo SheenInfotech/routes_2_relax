@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f5ef">
+  <meta name="description" content="Manage your Routes 2 Relax account and travel profile.">
+  <title>My Account — Routes 2 Relax</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/icons.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css">
+  <link rel="stylesheet" href="assets/boxicons.css">
+  <style>
+    :root {
+      --ink: #173b39;
+      --deep: #102c2a;
+      --green: #245c53;
+      --cream: #f6f5ef;
+      --paper: #fffefa;
+      --muted: #647773;
+      --line: #e1e7df;
+      --gold: #e4b54e;
+      --serif: "Playfair Display", Georgia, serif;
+      --sans: "DM Sans", Arial, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--cream); color: var(--ink); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-decoration: none; }
+    .wrap { width: min(1120px, calc(100% - 40px)); margin-inline: auto; }
+    .announcement { padding: 9px 16px; background: var(--deep); color: white; text-align: center; font-size: 11px; letter-spacing: .04em; }
+    .announcement strong { color: #f2ce78; }
+    .site-header { position: sticky; z-index: 5; top: 0; border-bottom: 1px solid #173b3912; background: #f6f5eff2; backdrop-filter: blur(12px); }
+    .nav { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand img { display: block; width: 112px; height: 72px; border-radius: 4px; background: white; object-fit: contain; }
+    .nav-links { display: flex; align-items: center; gap: clamp(16px, 3vw, 34px); }
+    .nav-links a { color: #415e59; font-size: 12px; font-weight: 600; }
+    .nav-links a[aria-current="page"] { color: #a56d18; }
+    .button { display: inline-flex; min-height: 44px; align-items: center; justify-content: center; gap: 8px; padding: 0 18px; border: 1px solid transparent; border-radius: 999px; background: var(--green); color: white; cursor: pointer; font: 700 12px var(--sans); transition: background .2s, transform .2s; }
+    .button:hover { transform: translateY(-2px); background: var(--deep); }
+    .button:disabled { cursor: wait; opacity: .65; transform: none; }
+    .button-outline { border-color: #b7c8bc; background: transparent; color: var(--ink); }
+    .button-outline:hover { color: white; }
+    main { min-height: 68vh; padding: 65px 0 84px; }
+    .page-heading { max-width: 700px; margin-bottom: 26px; }
+    .eyebrow { color: #a77a25; font-size: 10px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+    h1 { margin: 8px 0 10px; font: 600 clamp(34px, 5vw, 52px)/1.1 var(--serif); letter-spacing: -.025em; }
+    .page-heading p:last-child { color: var(--muted); font-size: 13px; line-height: 1.75; }
+    .profile-card { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 35px; padding: 32px; border: 1px solid var(--line); border-radius: 12px; background: var(--paper); box-shadow: 0 14px 40px #173b3908; }
+    .photo-column { display: flex; align-items: center; flex-direction: column; gap: 14px; padding-top: 8px; }
+    .avatar { display: grid; width: 148px; height: 148px; overflow: hidden; place-items: center; border: 1px solid var(--line); border-radius: 50%; background: #eaf0e9; color: var(--green); font: 600 54px var(--serif); }
+    .avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .avatar img[hidden] { display: none; }
+    .photo-picker { cursor: pointer; text-align: center; }
+    .photo-picker input { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; clip-path: inset(50%); }
+    .photo-help { max-width: 190px; margin: 0; color: var(--muted); font-size: 10px; line-height: 1.6; text-align: center; }
+    .profile-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .field { display: grid; min-width: 0; gap: 7px; }
+    .field--full { grid-column: 1 / -1; }
+    .field label { color: #294944; font-size: 11px; font-weight: 700; }
+    .field input, .field textarea { width: 100%; min-height: 44px; padding: 10px 12px; border: 1px solid #cbd4ce; border-radius: 6px; outline: none; background: white; color: var(--ink); font: 13px var(--sans); }
+    .field textarea { min-height: 110px; resize: vertical; }
+    .field input:focus, .field textarea:focus { border-color: #588277; box-shadow: 0 0 0 3px #245c5315; }
+    .field input[readonly] { background: #f1f3ee; color: var(--muted); }
+    .form-actions { display: flex; grid-column: 1 / -1; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 4px; }
+    .profile-status { grid-column: 1 / -1; min-height: 20px; margin: 0; color: #596e63; font-size: 11px; line-height: 1.6; }
+    .profile-status:empty { display: none; }
+    .profile-feedback-card { margin-top: 24px; padding: 28px; border: 1px solid var(--line); border-radius: 12px; background: var(--paper); box-shadow: 0 14px 40px #173b3908; }
+    .profile-feedback-card h2 { margin: 8px 0; font: 600 28px/1.2 var(--serif); }
+    .profile-feedback-intro { margin: 0 0 20px; color: var(--muted); font-size: 12px; line-height: 1.7; }
+    .profile-feedback-form { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .profile-feedback-field { display: grid; min-width: 0; gap: 7px; }
+    .profile-feedback-field--full { grid-column: 1 / -1; }
+    .profile-feedback-field label { color: #294944; font-size: 11px; font-weight: 700; }
+    .profile-feedback-field input, .profile-feedback-field select, .profile-feedback-field textarea { width: 100%; min-height: 44px; padding: 10px 12px; border: 1px solid #cbd4ce; border-radius: 6px; outline: none; background: white; color: var(--ink); font: 13px var(--sans); }
+    .profile-feedback-field textarea { min-height: 120px; resize: vertical; }
+    .profile-feedback-field input:focus, .profile-feedback-field select:focus, .profile-feedback-field textarea:focus { border-color: #588277; box-shadow: 0 0 0 3px #245c5315; }
+    .profile-feedback-actions, .feedback-status { grid-column: 1 / -1; }
+    .feedback-status { min-height: 18px; margin: 0; color: #596e63; font-size: 11px; line-height: 1.6; }
+    .feedback-status:empty { display: none; }
+    .my-feedback-card { margin-top: 24px; padding: 28px; border: 1px solid var(--line); border-radius: 12px; background: var(--paper); box-shadow: 0 14px 40px #173b3908; }
+    .my-feedback-card h2 { margin: 8px 0 16px; font: 600 28px/1.2 var(--serif); }
+    .my-feedback-status, .my-feedback-empty { color: var(--muted); font-size: 12px; line-height: 1.7; }
+    .my-feedback-list { display: grid; gap: 12px; margin: 0; padding: 0; list-style: none; }
+    .my-feedback-list[hidden] { display: none; }
+    .my-feedback-item { padding: 18px; border: 1px solid var(--line); border-radius: 8px; background: white; }
+    .my-feedback-item__heading { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; }
+    .my-feedback-item__stars { color: #a77a25; font-size: 16px; letter-spacing: .08em; }
+    .my-feedback-item__state { padding: 5px 9px; border-radius: 999px; background: #f8efda; color: #765914; font-size: 10px; font-weight: 700; }
+    .my-feedback-item__state--approved { background: #e6f1e8; color: #245c53; }
+    .my-feedback-item__package { margin: 10px 0 6px; color: var(--muted); font-size: 11px; font-weight: 600; }
+    .my-feedback-item__text { margin: 0; color: var(--ink); font-size: 13px; line-height: 1.7; overflow-wrap: anywhere; white-space: pre-wrap; }
+    .my-feedback-item__date { display: block; margin-top: 12px; color: var(--muted); font-size: 10px; }
+    footer { padding: 26px 0; background: var(--deep); color: #d2dcd4; }
+    .footer-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; font-size: 11px; }
+    .footer-logo { display: block; width: 94px; height: 62px; background: white; object-fit: contain; }
+    .footer-links { display: flex; flex-wrap: wrap; gap: 18px; }
+    .footer-links a:hover { color: #f2ce78; }
+    @media (max-width: 700px) {
+      .wrap { width: calc(100% - 32px); }
+      .nav { min-height: 66px; flex-wrap: wrap; gap: 7px; }
+      .brand img { width: 92px; height: 62px; }
+      .nav-links { min-width: 0; flex: 1 1 0; flex-wrap: wrap; justify-content: center; gap: 8px; }
+      .nav-links a { font-size: 10px; }
+      .nav > .button { min-height: 38px; padding-inline: 12px; font-size: 10px; }
+      main { padding: 44px 0 60px; }
+      .profile-card { grid-template-columns: 1fr; gap: 25px; padding: 22px; }
+      .photo-column { padding: 0; }
+      .profile-feedback-card { padding: 22px; }
+      .my-feedback-card { padding: 22px; }
+      .footer-row { align-items: flex-start; flex-direction: column; }
+    }
+    @media (max-width: 420px) {
+      .announcement { font-size: 9px; }
+      .nav-links { gap: 8px; }
+      .nav-links a { font-size: 9px; }
+      .profile-fields { grid-template-columns: 1fr; }
+      .field--full, .form-actions, .profile-status { grid-column: 1; }
+      .profile-feedback-form { grid-template-columns: 1fr; }
+      .profile-feedback-field--full, .profile-feedback-actions, .feedback-status { grid-column: 1; }
+    }
+  </style>
+  <link rel="stylesheet" href="assets/modern-ui.css">
+</head>
+<body>
+  <div class="announcement">A little more wonder, a little less planning. <strong>Your Kashmir escape starts here.</strong></div>
+  <header class="site-header">
+    <div class="wrap nav">
+      <a class="brand" href="index.html#home" aria-label="Routes 2 Relax home"><img src="assets/brand-mark.png" alt="Routes 2 Relax — Tours and Travels"></a>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="index.html#home">Home</a>
+        <a href="packages.html">Packages</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <a class="button" data-auth-trigger href="account.html">Account</a>
+    </div>
+  </header>
+  <main class="wrap">
+    <div class="page-heading">
+      <p class="eyebrow">Your Routes 2 Relax account</p>
+      <h1>Travel profile</h1>
+      <p>Keep your contact details and profile picture up to date for a smoother trip-planning experience.</p>
+    </div>
+    <section class="profile-card" aria-label="Edit your account profile">
+      <div class="photo-column">
+        <div class="avatar">
+          <span id="profile-avatar-fallback" aria-hidden="true"><svg class="site-icon"><use href="assets/icons.svg#user"></use></svg></span>
+          <img id="profile-avatar" alt="Your profile picture" hidden>
+        </div>
+        <label class="button button-outline photo-picker" for="profile-photo"><i class="bx bx-camera bx-ui-icon" aria-hidden="true"></i> Upload profile picture
+          <input id="profile-photo" type="file" accept="image/jpeg,image/png,image/webp" aria-describedby="profile-photo-help">
+        </label>
+        <p class="photo-help" id="profile-photo-help">JPG, PNG or WebP. Maximum file size: 2 MB.</p>
+      </div>
+      <form class="profile-fields" id="profile-form">
+        <div class="field field--full">
+          <label for="profile-email"><i class="bx bx-envelope bx-ui-icon" aria-hidden="true"></i> Account email</label>
+          <input id="profile-email" type="email" readonly>
+        </div>
+        <div class="field field--full">
+          <label for="profile-name">Full name *</label>
+          <input id="profile-name" name="full_name" autocomplete="name" maxlength="80" required>
+        </div>
+        <div class="field">
+          <label for="profile-mobile"><i class="bx bx-phone bx-ui-icon" aria-hidden="true"></i> Mobile number</label>
+          <input id="profile-mobile" name="mobile_no" type="tel" autocomplete="tel" placeholder="+91 98765 43210" maxlength="20">
+        </div>
+        <div class="field field--full">
+          <label for="profile-address"><i class="bx bx-map bx-ui-icon" aria-hidden="true"></i> Address</label>
+          <textarea id="profile-address" name="address" autocomplete="street-address" maxlength="500"></textarea>
+        </div>
+        <div class="form-actions">
+          <button class="button" id="profile-save" type="submit">Save profile</button>
+          <button class="button button-outline" id="profile-signout" type="button">Sign out</button>
+        </div>
+        <p class="profile-status" id="profile-status" role="status" aria-live="polite">Loading your profile…</p>
+      </form>
+    </section>
+    <section class="profile-feedback-card" aria-labelledby="account-feedback-heading">
+      <p class="eyebrow">Customer feedback</p>
+      <h2 id="account-feedback-heading">Share your experience</h2>
+      <p class="profile-feedback-intro">Tell us about your trip. Your feedback is saved for review and appears on the home page after approval.</p>
+      <form class="profile-feedback-form" id="guest-feedback-form">
+        <div class="profile-feedback-field">
+          <label for="feedback-name">Your name (optional)</label>
+          <input id="feedback-name" name="name" autocomplete="name" maxlength="80">
+        </div>
+        <div class="profile-feedback-field">
+          <label for="feedback-rating">Your rating *</label>
+          <select id="feedback-rating" name="rating" required>
+            <option value="">Select a rating</option>
+            <option value="5">★★★★★ — Excellent (5)</option>
+            <option value="4">★★★★☆ — Very good (4)</option>
+            <option value="3">★★★☆☆ — Good (3)</option>
+            <option value="2">★★☆☆☆ — Could be better (2)</option>
+            <option value="1">★☆☆☆☆ — Needs improvement (1)</option>
+          </select>
+        </div>
+        <div class="profile-feedback-field profile-feedback-field--full">
+          <label for="feedback-package">Package or destination</label>
+          <select id="feedback-package" name="package">
+            <option value="Not specified">Choose a trip (optional)</option>
+            <option value="Kashmir couple package — 4 nights / 5 days">Kashmir couple package — 4 nights / 5 days</option>
+            <option value="Kashmir couple package — 3 nights / 4 days">Kashmir couple package — 3 nights / 4 days</option>
+            <option value="Kashmir getaway — 5 nights / 6 days">Kashmir getaway — 5 nights / 6 days</option>
+            <option value="Kashmir group tour for 5 people">Kashmir group tour for 5 people</option>
+            <option value="Girls-only Keran Valley trip">Girls-only Keran Valley trip</option>
+            <option value="Custom trip or destination">Custom trip or destination</option>
+          </select>
+        </div>
+        <div class="profile-feedback-field profile-feedback-field--full">
+          <label for="feedback-message">Your feedback *</label>
+          <textarea id="feedback-message" name="feedback" placeholder="What went well? What could we improve?" maxlength="3000" required></textarea>
+        </div>
+        <div class="profile-feedback-actions">
+          <button class="button" id="send-review-button" type="submit" disabled>Send feedback</button>
+        </div>
+        <p class="feedback-status" id="feedback-status" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+    <section class="my-feedback-card" aria-labelledby="my-feedback-heading">
+      <p class="eyebrow">Your feedback</p>
+      <h2 id="my-feedback-heading">My submitted reviews</h2>
+      <p class="my-feedback-status" id="my-feedback-status" role="status" aria-live="polite">Loading your saved feedback…</p>
+      <p class="my-feedback-empty" id="my-feedback-empty" hidden>You have not submitted any feedback yet.</p>
+      <ul class="my-feedback-list" id="my-feedback-list" aria-label="Your submitted reviews" hidden></ul>
+    </section>
+  </main>
+  <footer>
+    <div class="wrap footer-row">
+      <a href="index.html#home" aria-label="Routes 2 Relax home"><img class="footer-logo" src="assets/brand-mark.png" alt="Routes 2 Relax"></a>
+      <nav class="footer-links" aria-label="Footer navigation">
+        <a href="index.html#home">Home</a><a href="packages.html">Packages</a><a href="about.html">About</a><a href="contact.html">Contact</a>
+        <a class="icon-link" href="https://www.instagram.com/routes_2_relax_kashmir" target="_blank" rel="noopener noreferrer"><i class="bx bxl-instagram bx-ui-icon social-icon" aria-hidden="true"></i>Instagram</a>
+        <a class="icon-link" href="https://www.facebook.com/Routes2Relax" target="_blank" rel="noopener noreferrer"><i class="bx bxl-facebook-circle bx-ui-icon social-icon" aria-hidden="true"></i>Facebook</a>
+        <a class="icon-link" href="https://www.youtube.com/Routes2Relax" target="_blank" rel="noopener noreferrer"><i class="bx bxl-youtube bx-ui-icon social-icon" aria-hidden="true"></i>YouTube</a>
+      </nav>
+      <span>© <span id="year"></span> Routes 2 Relax</span>
+    </div>
+  </footer>
+  <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+  <script src="assets/supabase-config.js" defer></script>
+  <script src="assets/auth.js" defer></script>
+  <script src="assets/profile.js" defer></script>
+  <script src="assets/reviews.js" defer></script>
+</body>
+</html>

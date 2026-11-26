@@ -1,0 +1,196 @@
+.r2r-floating-contact {
+  position: fixed;
+  z-index: 90;
+  right: 18px;
+  bottom: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.r2r-floating-contact__button {
+  display: inline-flex;
+  min-height: 48px;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 999px;
+  background: #245c53;
+  box-shadow: 0 5px 18px #102c2a38;
+  color: #fff;
+  cursor: pointer;
+  font: 700 12px/1.2 "DM Sans", Arial, sans-serif;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background .2s, transform .2s;
+}
+
+.r2r-floating-contact__button:hover {
+  transform: translateY(-2px);
+  background: #102c2a;
+}
+
+.r2r-floating-contact__button:focus-visible,
+.r2r-callback-dialog button:focus-visible,
+.r2r-callback-dialog input:focus-visible,
+.r2r-callback-dialog select:focus-visible {
+  outline: 3px solid #e4b54e;
+  outline-offset: 3px;
+}
+
+.r2r-floating-contact__button--chat {
+  background: #167451;
+}
+
+.r2r-floating-contact__button--callback {
+  background: #173b39;
+}
+
+.r2r-floating-contact__icon {
+  font-size: 17px;
+  line-height: 1;
+}
+
+.r2r-callback-dialog {
+  position: fixed;
+  width: min(440px, calc(100vw - 32px));
+  max-width: none;
+  max-height: calc(100vh - 32px);
+  max-height: calc(100dvh - 32px);
+  margin: auto;
+  padding: 30px;
+  overflow: auto;
+  border: 1px solid #e1e7df;
+  border-radius: 12px;
+  background: #fffefa;
+  box-shadow: 0 22px 70px #102c2a45;
+  color: #173b39;
+  font-family: "DM Sans", Arial, sans-serif;
+}
+
+.r2r-callback-dialog::backdrop {
+  background: #0b211fbb;
+  backdrop-filter: blur(3px);
+}
+
+.r2r-callback-dialog__close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: #415e59;
+  cursor: pointer;
+  font-size: 24px;
+}
+
+.r2r-callback-dialog__eyebrow {
+  margin: 0 0 8px;
+  color: #a77a25;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.r2r-callback-dialog h2 {
+  margin: 0 34px 8px 0;
+  font: 600 29px/1.15 "Playfair Display", Georgia, serif;
+}
+
+.r2r-callback-dialog__intro {
+  margin: 0 0 20px;
+  color: #647773;
+  font-size: 12px;
+  line-height: 1.65;
+}
+
+.r2r-callback-form {
+  display: grid;
+  gap: 14px;
+}
+
+.r2r-callback-form__field {
+  display: grid;
+  gap: 6px;
+}
+
+.r2r-callback-form label {
+  color: #415e59;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.r2r-callback-form input,
+.r2r-callback-form select {
+  width: 100%;
+  min-height: 43px;
+  padding: 10px 12px;
+  border: 1px solid #d2dbd4;
+  border-radius: 5px;
+  background: #fff;
+  color: #173b39;
+  font: 12px "DM Sans", Arial, sans-serif;
+}
+
+.r2r-callback-form input:focus,
+.r2r-callback-form select:focus {
+  border-color: #588277;
+  outline: 0;
+  box-shadow: 0 0 0 3px #245c5315;
+}
+
+.r2r-callback-form__submit {
+  min-height: 45px;
+  margin-top: 2px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 999px;
+  background: #245c53;
+  color: #fff;
+  cursor: pointer;
+  font: 700 12px "DM Sans", Arial, sans-serif;
+}
+
+.r2r-callback-form__submit:hover {
+  background: #102c2a;
+}
+
+.r2r-callback-dialog__note {
+  margin: 12px 0 0;
+  color: #77877f;
+  font-size: 10px;
+  line-height: 1.55;
+}
+
+@media (max-width: 480px) {
+  .r2r-floating-contact {
+    right: 10px;
+    bottom: 12px;
+    gap: 8px;
+  }
+
+  .r2r-floating-contact__button {
+    min-height: 44px;
+    gap: 8px;
+    padding: 0 13px;
+    font-size: 11px;
+  }
+
+  .r2r-callback-dialog {
+    padding: 27px 22px 22px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .r2r-floating-contact__button {
+    transition: none;
+  }
+}
