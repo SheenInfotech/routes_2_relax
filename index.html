@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#f6f5ef">
+  <link rel="icon" type="image/png" sizes="64x64" href="assets/favicon.png">
   <meta name="description" content="Explore Kashmir with Routes 2 Relax: a 4-night, 5-day couple tour covering Sonmarg, Gulmarg, Pahalgam and Srinagar for ₹35,000.">
   <title>Routes 2 Relax — Kashmir, at your own pace</title>
   <link rel="preconnect" href="https://images.unsplash.com">
@@ -409,6 +410,9 @@
     .privacy-note { margin: 13px 0 0; color: #77877f; font-size: 10px; line-height: 1.5; text-align: center; }
     .form-error { display: none; margin: -10px 0 14px; color: #a83b32; font-size: 12px; }
     .form-error.is-visible { display: block; }
+    .form-status { min-height: 18px; margin: 12px 0 0; color: var(--green); font-size: 12px; line-height: 1.5; }
+    .form-status:empty { display: none; }
+    .form-status.is-error { color: #a83b32; }
 
     @media (max-width: 900px) {
       .phone-link { display: none; }
@@ -798,7 +802,7 @@
     <section class="enquiry-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-description">
       <button class="modal-close" type="button" aria-label="Close enquiry form"><svg class="site-icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#close"></use></svg></button>
       <h2 id="modal-title">Want to go for a memorable holiday?</h2>
-      <p class="modal-intro" id="modal-description">Share a few details and choose how you’d like to reach us.</p>
+      <p class="modal-intro" id="modal-description">Share a few details and our team will follow up about your Kashmir trip.</p>
       <form id="enquiry-form">
         <div class="form-grid">
           <div class="field full">
@@ -817,15 +821,15 @@
           </div>
           <div class="field">
             <label for="guest-name">Name</label>
-            <input id="guest-name" name="name" type="text" placeholder="Enter your name" autocomplete="name" required>
+            <input id="guest-name" name="name" type="text" placeholder="Enter your name" autocomplete="name" maxlength="80" required>
           </div>
           <div class="field">
             <label for="guest-phone"><i class="bx bx-phone bx-ui-icon" aria-hidden="true"></i> Mobile number</label>
-            <input id="guest-phone" name="phone" type="tel" placeholder="+91 98765 43210" autocomplete="tel" required>
+            <input id="guest-phone" name="phone" type="tel" placeholder="+91 98765 43210" autocomplete="tel" minlength="7" maxlength="20" required>
           </div>
           <div class="field full">
             <label for="guest-email"><i class="bx bx-envelope bx-ui-icon" aria-hidden="true"></i> Email address <span style="font-weight:400;color:#77877f">(optional)</span></label>
-            <input id="guest-email" name="email" type="email" placeholder="you@example.com" autocomplete="email">
+            <input id="guest-email" name="email" type="email" placeholder="you@example.com" autocomplete="email" maxlength="254">
           </div>
           <div class="field">
             <label for="travel-date">Preferred travel date</label>
@@ -857,11 +861,11 @@
           </div>
         </div>
         <p class="form-error" id="form-error" role="alert">Please add at least one adult traveller.</p>
+        <p class="form-status" id="enquiry-status" role="status" aria-live="polite"></p>
         <div class="form-actions">
-          <button class="button" type="submit" data-send="whatsapp"><svg class="site-icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#chat"></use></svg> Send on WhatsApp</button>
-          <button class="button button-outline" type="submit" data-send="email"><svg class="site-icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#mail"></use></svg> Send by email</button>
+          <button class="button" id="enquiry-submit" type="submit"><svg class="site-icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#chat"></use></svg> Send enquiry</button>
         </div>
-        <p class="privacy-note">Your details will be used only to respond to this trip enquiry.</p>
+        <p class="privacy-note">Your details are saved so our team can follow up on this enquiry.</p>
       </form>
     </section>
   </div>
@@ -874,13 +878,28 @@
       const menuToggle = document.querySelector(".menu-toggle");
       const siteMenu = document.getElementById("site-menu");
       const errorMessage = document.getElementById("form-error");
+      const statusMessage = document.getElementById("enquiry-status");
+      const submitButton = document.getElementById("enquiry-submit");
       let lastFocusedElement = null;
       const guests = { adults: 2, children: 0, infants: 0 };
+      const submitLabel = submitButton.textContent.trim();
 
       document.getElementById("year").textContent = new Date().getFullYear();
 
       function openModal(packageName) {
         lastFocusedElement = document.activeElement;
+        form.reset();
+        guests.adults = 2;
+        guests.children = 0;
+        guests.infants = 0;
+        document.getElementById("adults-count").textContent = guests.adults;
+        document.getElementById("children-count").textContent = guests.children;
+        document.getElementById("infants-count").textContent = guests.infants;
+        errorMessage.classList.remove("is-visible");
+        statusMessage.textContent = "";
+        statusMessage.classList.remove("is-error");
+        submitButton.disabled = false;
+        submitButton.textContent = submitLabel;
         document.getElementById("destination").value = packageName || "kashmir-4n5d";
         backdrop.classList.add("is-open");
         backdrop.setAttribute("aria-hidden", "false");
@@ -930,7 +949,7 @@
         });
       });
 
-      form.addEventListener("submit", function (event) {
+      form.addEventListener("submit", async function (event) {
         event.preventDefault();
         if (guests.adults < 1) {
           errorMessage.classList.add("is-visible");
@@ -939,28 +958,43 @@
         }
 
         const data = new FormData(form);
-        const date = data.get("date") || "Flexible / not decided";
-        const message = [
-          "Hello Routes 2 Relax! I’d like to enquire about a trip.",
-          "",
-          "Package: " + document.getElementById("destination").selectedOptions[0].textContent,
-          "Name: " + data.get("name"),
-          "Mobile: " + data.get("phone"),
-          "Email: " + (data.get("email") || "Not provided"),
-          "Preferred date: " + date,
-          "Date flexibility: " + data.get("flexibility"),
-          "Travellers: " + guests.adults + " adults, " + guests.children + " children, " + guests.infants + " infants"
-        ].join("\n");
-        const sendMethod = event.submitter ? event.submitter.dataset.send : "whatsapp";
+        errorMessage.classList.remove("is-visible");
+        statusMessage.textContent = "Saving your enquiry…";
+        statusMessage.classList.remove("is-error");
+        submitButton.disabled = true;
 
-        if (sendMethod === "email") {
-          window.location.href = "mailto:routestorelax@gmail.com?subject=" +
-            encodeURIComponent("Kashmir trip enquiry from " + data.get("name")) +
-            "&body=" + encodeURIComponent(message);
-        } else {
-          window.open("https://wa.me/919596261463?text=" + encodeURIComponent(message), "_blank", "noopener,noreferrer");
+        try {
+          if (!window.R2RAuth) {
+            throw new Error("Supabase authentication client is not available.");
+          }
+
+          const client = await window.R2RAuth.ready;
+          const result = await client.from("enquiries").insert({
+            name: String(data.get("name") || "").trim(),
+            phone: String(data.get("phone") || "").trim(),
+            email: String(data.get("email") || "").trim() || null,
+            package_name: document.getElementById("destination").selectedOptions[0].textContent.trim(),
+            preferred_date: data.get("date") || null,
+            date_flexibility: data.get("flexibility"),
+            adults: guests.adults,
+            children: guests.children,
+            infants: guests.infants,
+            message: null,
+            source: "home_modal"
+          });
+
+          if (result.error) {
+            throw result.error;
+          }
+
+          statusMessage.textContent = "Thanks! Your enquiry has been saved. Our team will be in touch.";
+          submitButton.textContent = "Enquiry saved";
+        } catch (error) {
+          console.error("Could not save trip enquiry:", error);
+          statusMessage.textContent = "We couldn’t save your enquiry. Please check your connection and try again.";
+          statusMessage.classList.add("is-error");
+          submitButton.disabled = false;
         }
-        closeModal();
       });
 
     }());
@@ -995,8 +1029,8 @@
     <p class="auth-dialog-status" id="auth-status" role="status" aria-live="polite"></p>
   </dialog>
   <div class="r2r-floating-contact" aria-label="Quick contact">
-    <a class="r2r-floating-contact__button r2r-floating-contact__button--chat" href="https://wa.me/919596261463?text=Hello%20Routes%202%20Relax%2C%20I%20would%20like%20to%20chat%20about%20a%20Kashmir%20trip." target="_blank" rel="noopener noreferrer" aria-label="Start a live chat on WhatsApp">
-      <span class="r2r-floating-contact__icon" aria-hidden="true"><i class="bx bxl-whatsapp bx-ui-icon" aria-hidden="true"></i></span><span>Live chat</span>
+    <a class="r2r-floating-contact__button r2r-floating-contact__button--chat" href="https://wa.me/919596261463?text=Hello%20Routes%202%20Relax%2C%20I%27d%20like%20to%20chat%20about%20a%20Kashmir%20trip." target="_blank" rel="noopener noreferrer" aria-label="Start a WhatsApp chat with Routes 2 Relax">
+      <span class="r2r-floating-contact__icon" aria-hidden="true"><i class="bx bxl-whatsapp bx-ui-icon" aria-hidden="true"></i></span><span>Chat on WhatsApp</span>
     </a>
     <button class="r2r-floating-contact__button r2r-floating-contact__button--callback r2r-callback-open" type="button" aria-haspopup="dialog" aria-controls="r2r-callback-dialog">
       <span class="r2r-floating-contact__icon" aria-hidden="true"><i class="bx bx-phone bx-ui-icon" aria-hidden="true"></i></span><span>Get a callback</span>
@@ -1006,15 +1040,15 @@
     <button class="r2r-callback-dialog__close" type="button" aria-label="Close callback form"><svg class="site-icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#close"></use></svg></button>
     <p class="r2r-callback-dialog__eyebrow">Talk to our team</p>
     <h2 id="r2r-callback-title">Get a callback</h2>
-    <p class="r2r-callback-dialog__intro" id="r2r-callback-description">Share your number and we’ll prepare a callback request for you to send on WhatsApp.</p>
+    <p class="r2r-callback-dialog__intro" id="r2r-callback-description">Leave your contact details and our team will follow up by phone.</p>
     <form class="r2r-callback-form" id="r2r-callback-form">
       <div class="r2r-callback-form__field">
         <label for="r2r-callback-name">Your name *</label>
-        <input id="r2r-callback-name" name="name" autocomplete="name" required>
+        <input id="r2r-callback-name" name="name" autocomplete="name" maxlength="80" required>
       </div>
       <div class="r2r-callback-form__field">
         <label for="r2r-callback-phone"><i class="bx bx-phone bx-ui-icon" aria-hidden="true"></i> Phone number *</label>
-        <input id="r2r-callback-phone" name="phone" type="tel" autocomplete="tel" required>
+        <input id="r2r-callback-phone" name="phone" type="tel" autocomplete="tel" minlength="7" maxlength="20" required>
       </div>
       <div class="r2r-callback-form__field">
         <label for="r2r-callback-time">Best time to call</label>
@@ -1027,11 +1061,12 @@
       </div>
       <div class="r2r-callback-form__field">
         <label for="r2r-callback-trip">Package or destination (optional)</label>
-        <input id="r2r-callback-trip" name="trip" placeholder="e.g. Kashmir group tour">
+        <input id="r2r-callback-trip" name="trip" maxlength="120" placeholder="e.g. Kashmir group tour">
       </div>
-      <button class="r2r-callback-form__submit" type="submit">Continue to WhatsApp</button>
+      <button class="r2r-callback-form__submit" type="submit">Request a callback</button>
     </form>
-    <p class="r2r-callback-dialog__note">WhatsApp opens with your request for review. Your details are shared only if you send the message.</p>
+    <p class="r2r-callback-dialog__status" role="status" aria-live="polite"></p>
+    <p class="r2r-callback-dialog__note">Your details are saved so our team can follow up on your request.</p>
   </dialog>
   <script src="assets/floating-contact.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>

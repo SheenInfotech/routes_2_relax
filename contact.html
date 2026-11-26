@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#f6f5ef">
+  <link rel="icon" type="image/png" sizes="64x64" href="assets/favicon.png">
   <meta name="description" content="Contact Routes 2 Relax to enquire about Kashmir tour packages, availability and custom itineraries.">
   <title>Contact Routes 2 Relax — Plan Your Kashmir Trip</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -71,6 +72,9 @@
     .submit-row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 18px; }
     .submit-row button { min-width: 200px; }
     .form-note { margin: 13px 0 0; color: #77877f; font-size: 10px; line-height: 1.6; }
+    .contact-status { min-height: 18px; margin: 14px 0 0; color: var(--green); font-size: 12px; line-height: 1.6; }
+    .contact-status:empty { display: none; }
+    .contact-status.is-error { color: #a83b32; }
     .contact-more { display: flex; align-items: center; justify-content: space-between; gap: 18px; margin-bottom: 65px; padding: 25px 30px; border-radius: 10px; background: var(--deep); color: white; }
     .contact-more h2 { margin: 0 0 5px; font-family: var(--serif); font-size: 25px; }
     .contact-more p { margin: 0; color: #ccdad0; font-size: 11px; line-height: 1.7; }
@@ -136,7 +140,7 @@
         <p>Reach out directly or send your trip details using the form. We’ll use them to understand what you’re looking for.</p>
         <div class="contact-method">
           <span class="contact-icon" aria-hidden="true"><i class="bx bx-phone bx-ui-icon" aria-hidden="true"></i></span>
-          <div><strong>Call or WhatsApp</strong><a href="tel:+919596261463">+91 95962 61463</a><br><a href="tel:+916005747546">+91 60057 47546</a></div>
+          <div><strong>Call us</strong><a href="tel:+919596261463">+91 95962 61463</a><br><a href="tel:+916005747546">+91 60057 47546</a></div>
         </div>
         <div class="contact-method">
           <span class="contact-icon" aria-hidden="true"><i class="bx bx-envelope bx-ui-icon" aria-hidden="true"></i></span>
@@ -150,27 +154,30 @@
       <section class="form-card" aria-labelledby="enquiry-heading">
         <p class="eyebrow">Plan your trip</p>
         <h2 id="enquiry-heading">Send an enquiry</h2>
-        <p class="form-intro">Fill in what you know so far, then choose WhatsApp or email. You can review your message before sending.</p>
+        <p class="form-intro">Share your trip details and our team will follow up using your contact information.</p>
         <form id="contact-form">
           <div class="form-grid">
             <div class="field">
               <label for="name">Your name *</label>
-              <input id="name" name="name" autocomplete="name" required>
+              <input id="name" name="name" autocomplete="name" maxlength="80" required>
             </div>
             <div class="field">
               <label for="phone"><i class="bx bx-phone bx-ui-icon" aria-hidden="true"></i> Phone number *</label>
-              <input id="phone" name="phone" type="tel" autocomplete="tel" required>
+              <input id="phone" name="phone" type="tel" autocomplete="tel" minlength="7" maxlength="20" required>
             </div>
             <div class="field">
               <label for="package">Package or trip</label>
               <select id="package" name="package">
-                <option value="Not sure yet">Not sure yet</option>
-                <option value="3 nights / 4 days — ₹20,000 for two">3 nights / 4 days — ₹20,000 for two</option>
-                <option value="4 nights / 5 days — ₹35,000 per couple">4 nights / 5 days — ₹35,000 per couple</option>
-                <option value="Kashmir getaway — Srinagar, Gulmarg, Pahalgam and Sonamarg, ₹28,000 per couple">Kashmir getaway — 5 nights / 6 days, ₹28,000 per couple</option>
-                <option value="Kashmir group tour — 5 people, ₹60,000 total">Kashmir group tour — 5 people, ₹60,000 total</option>
-                <option value="Girls-only Keran Valley trip — custom quote">Girls-only Keran Valley trip — custom quote</option>
-                <option value="Custom Kashmir itinerary">Custom Kashmir itinerary</option>
+                <option data-package="other" value="Not sure yet">Not sure yet</option>
+                <option data-package="kashmir-3n4d" value="3 nights / 4 days — ₹20,000 for two">3 nights / 4 days — ₹20,000 for two</option>
+                <option data-package="kashmir-4n5d" value="4 nights / 5 days — ₹35,000 per couple">4 nights / 5 days — ₹35,000 per couple</option>
+                <option data-package="kashmir-5n6d" value="Kashmir getaway — Srinagar, Gulmarg, Pahalgam and Sonamarg, ₹28,000 per couple">Kashmir getaway — 5 nights / 6 days, ₹28,000 per couple</option>
+                <option data-package="kashmir-group-5" value="Kashmir group tour — 5 people, ₹60,000 total">Kashmir group tour — 5 people, ₹60,000 total</option>
+                <option data-package="keran-girls-only" value="Girls-only Keran Valley trip — custom quote">Girls-only Keran Valley trip — custom quote</option>
+                <option data-package="srinagar" value="Srinagar escape">Srinagar escape</option>
+                <option data-package="gulmarg" value="Gulmarg escape">Gulmarg escape</option>
+                <option data-package="pahalgam" value="Pahalgam escape">Pahalgam escape</option>
+                <option data-package="custom" value="Custom Kashmir itinerary">Custom Kashmir itinerary</option>
               </select>
             </div>
             <div class="field">
@@ -179,14 +186,14 @@
             </div>
             <div class="field full">
               <label for="message">Anything else we should know?</label>
-              <textarea id="message" name="message" placeholder="Travellers, trip length, places you’d like to visit…"></textarea>
+              <textarea id="message" name="message" maxlength="2000" placeholder="Travellers, trip length, places you’d like to visit…"></textarea>
             </div>
           </div>
           <div class="submit-row">
-            <button class="button button-gold" type="submit" value="whatsapp">Continue to WhatsApp <i class="bx bxl-whatsapp bx-ui-icon" aria-hidden="true"></i><svg class="site-icon site-icon--arrow" aria-hidden="true" focusable="false"><use href="assets/icons.svg#arrow-up-right"></use></svg></button>
-            <button class="button button-outline" type="submit" value="email">Continue to email <i class="bx bx-envelope bx-ui-icon" aria-hidden="true"></i><svg class="site-icon site-icon--arrow" aria-hidden="true" focusable="false"><use href="assets/icons.svg#arrow-up-right"></use></svg></button>
+            <button class="button button-gold" id="contact-submit" type="submit"><i class="bx bx-send bx-ui-icon" aria-hidden="true"></i> Send enquiry <svg class="site-icon site-icon--arrow" aria-hidden="true" focusable="false"><use href="assets/icons.svg#arrow-up-right"></use></svg></button>
           </div>
-          <p class="form-note">Your details are included only in the message you choose to send. This website does not submit form data to a server.</p>
+          <p class="contact-status" id="contact-status" role="status" aria-live="polite"></p>
+          <p class="form-note">Your enquiry is saved to our database so our team can follow up.</p>
         </form>
       </section>
     </section>
@@ -209,28 +216,60 @@
   </footer>
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
-    document.getElementById("contact-form").addEventListener("submit", function (event) {
+    var packageSelect = document.getElementById("package");
+    var requestedPackage = new URLSearchParams(window.location.search).get("package");
+    var matchingPackage = Array.from(packageSelect.options).find(function (option) {
+      return option.dataset.package === requestedPackage;
+    });
+    if (matchingPackage) {
+      packageSelect.value = matchingPackage.value;
+    }
+
+    document.getElementById("contact-form").addEventListener("submit", async function (event) {
       event.preventDefault();
-      var formData = new FormData(event.currentTarget);
-      var fields = [
-        "Hello Routes 2 Relax, I would like to enquire about a Kashmir trip.",
-        "Name: " + formData.get("name"),
-        "Phone: " + formData.get("phone"),
-        "Package: " + formData.get("package"),
-        "Preferred travel date: " + (formData.get("travel-date") || "Not specified"),
-        "Details: " + (formData.get("message") || "None")
-      ];
-      var message = fields.join("\n");
-      if (event.submitter && event.submitter.value === "email") {
-        window.location.href = "mailto:info@routestorelax.in?subject=Kashmir%20trip%20enquiry&body=" + encodeURIComponent(message);
-        return;
+      var form = event.currentTarget;
+      var formData = new FormData(form);
+      var status = document.getElementById("contact-status");
+      var submitButton = document.getElementById("contact-submit");
+      status.textContent = "Saving your enquiry…";
+      status.classList.remove("is-error");
+      submitButton.disabled = true;
+
+      try {
+        if (!window.R2RAuth) {
+          throw new Error("Supabase authentication client is not available.");
+        }
+
+        var client = await window.R2RAuth.ready;
+        var result = await client.from("enquiries").insert({
+          name: String(formData.get("name") || "").trim(),
+          phone: String(formData.get("phone") || "").trim(),
+          email: null,
+          package_name: String(formData.get("package") || "").trim(),
+          preferred_date: formData.get("travel-date") || null,
+          date_flexibility: null,
+          message: String(formData.get("message") || "").trim() || null,
+          source: "contact_page"
+        });
+
+        if (result.error) {
+          throw result.error;
+        }
+
+        form.reset();
+        status.textContent = "Thanks! Your enquiry has been saved. Our team will be in touch.";
+        submitButton.textContent = "Enquiry saved";
+      } catch (error) {
+        console.error("Could not save contact enquiry:", error);
+        status.textContent = "We couldn’t save your enquiry. Please check your connection and try again.";
+        status.classList.add("is-error");
+        submitButton.disabled = false;
       }
-      window.open("https://wa.me/919596261463?text=" + encodeURIComponent(message), "_blank", "noopener,noreferrer");
     });
   </script>
   <div class="r2r-floating-contact" aria-label="Quick contact">
-    <a class="r2r-floating-contact__button r2r-floating-contact__button--chat" href="https://wa.me/919596261463?text=Hello%20Routes%202%20Relax%2C%20I%20would%20like%20to%20chat%20about%20a%20Kashmir%20trip." target="_blank" rel="noopener noreferrer" aria-label="Start a live chat on WhatsApp">
-      <span class="r2r-floating-contact__icon" aria-hidden="true"><i class="bx bxl-whatsapp bx-ui-icon" aria-hidden="true"></i></span><span>Live chat</span>
+    <a class="r2r-floating-contact__button r2r-floating-contact__button--chat" href="https://wa.me/919596261463?text=Hello%20Routes%202%20Relax%2C%20I%27d%20like%20to%20chat%20about%20a%20Kashmir%20trip." target="_blank" rel="noopener noreferrer" aria-label="Start a WhatsApp chat with Routes 2 Relax">
+      <span class="r2r-floating-contact__icon" aria-hidden="true"><i class="bx bxl-whatsapp bx-ui-icon" aria-hidden="true"></i></span><span>Chat on WhatsApp</span>
     </a>
     <button class="r2r-floating-contact__button r2r-floating-contact__button--callback r2r-callback-open" type="button" aria-haspopup="dialog" aria-controls="r2r-callback-dialog">
       <span class="r2r-floating-contact__icon" aria-hidden="true"><i class="bx bx-phone bx-ui-icon" aria-hidden="true"></i></span><span>Get a callback</span>
@@ -240,15 +279,15 @@
     <button class="r2r-callback-dialog__close" type="button" aria-label="Close callback form"><svg class="site-icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#close"></use></svg></button>
     <p class="r2r-callback-dialog__eyebrow">Talk to our team</p>
     <h2 id="r2r-callback-title">Get a callback</h2>
-    <p class="r2r-callback-dialog__intro" id="r2r-callback-description">Share your number and we’ll prepare a callback request for you to send on WhatsApp.</p>
+    <p class="r2r-callback-dialog__intro" id="r2r-callback-description">Leave your contact details and our team will follow up by phone.</p>
     <form class="r2r-callback-form" id="r2r-callback-form">
       <div class="r2r-callback-form__field">
         <label for="r2r-callback-name">Your name *</label>
-        <input id="r2r-callback-name" name="name" autocomplete="name" required>
+        <input id="r2r-callback-name" name="name" autocomplete="name" maxlength="80" required>
       </div>
       <div class="r2r-callback-form__field">
         <label for="r2r-callback-phone"><i class="bx bx-phone bx-ui-icon" aria-hidden="true"></i> Phone number *</label>
-        <input id="r2r-callback-phone" name="phone" type="tel" autocomplete="tel" required>
+        <input id="r2r-callback-phone" name="phone" type="tel" autocomplete="tel" minlength="7" maxlength="20" required>
       </div>
       <div class="r2r-callback-form__field">
         <label for="r2r-callback-time">Best time to call</label>
@@ -261,11 +300,12 @@
       </div>
       <div class="r2r-callback-form__field">
         <label for="r2r-callback-trip">Package or destination (optional)</label>
-        <input id="r2r-callback-trip" name="trip" placeholder="e.g. Kashmir group tour">
+        <input id="r2r-callback-trip" name="trip" maxlength="120" placeholder="e.g. Kashmir group tour">
       </div>
-      <button class="r2r-callback-form__submit" type="submit">Continue to WhatsApp</button>
+      <button class="r2r-callback-form__submit" type="submit">Request a callback</button>
     </form>
-    <p class="r2r-callback-dialog__note">WhatsApp opens with your request for review. Your details are shared only if you send the message.</p>
+    <p class="r2r-callback-dialog__status" role="status" aria-live="polite"></p>
+    <p class="r2r-callback-dialog__note">Your details are saved so our team can follow up on your request.</p>
   </dialog>
   <script src="assets/floating-contact.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>

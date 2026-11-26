@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#f6f5ef">
+  <link rel="icon" type="image/png" sizes="64x64" href="assets/favicon.png">
   <meta name="description" content="Meet Routes 2 Relax, a Kashmir-focused travel team helping you plan stays, transfers and memorable valley experiences.">
   <title>About Routes 2 Relax — Kashmir Tours &amp; Travel</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -182,8 +183,8 @@
   </footer>
   <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
   <div class="r2r-floating-contact" aria-label="Quick contact">
-    <a class="r2r-floating-contact__button r2r-floating-contact__button--chat" href="https://wa.me/919596261463?text=Hello%20Routes%202%20Relax%2C%20I%20would%20like%20to%20chat%20about%20a%20Kashmir%20trip." target="_blank" rel="noopener noreferrer" aria-label="Start a live chat on WhatsApp">
-      <span class="r2r-floating-contact__icon" aria-hidden="true"><i class="bx bxl-whatsapp bx-ui-icon" aria-hidden="true"></i></span><span>Live chat</span>
+    <a class="r2r-floating-contact__button r2r-floating-contact__button--chat" href="https://wa.me/919596261463?text=Hello%20Routes%202%20Relax%2C%20I%27d%20like%20to%20chat%20about%20a%20Kashmir%20trip." target="_blank" rel="noopener noreferrer" aria-label="Start a WhatsApp chat with Routes 2 Relax">
+      <span class="r2r-floating-contact__icon" aria-hidden="true"><i class="bx bxl-whatsapp bx-ui-icon" aria-hidden="true"></i></span><span>Chat on WhatsApp</span>
     </a>
     <button class="r2r-floating-contact__button r2r-floating-contact__button--callback r2r-callback-open" type="button" aria-haspopup="dialog" aria-controls="r2r-callback-dialog">
       <span class="r2r-floating-contact__icon" aria-hidden="true"><i class="bx bx-phone bx-ui-icon" aria-hidden="true"></i></span><span>Get a callback</span>
@@ -193,15 +194,15 @@
     <button class="r2r-callback-dialog__close" type="button" aria-label="Close callback form"><svg class="site-icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#close"></use></svg></button>
     <p class="r2r-callback-dialog__eyebrow">Talk to our team</p>
     <h2 id="r2r-callback-title">Get a callback</h2>
-    <p class="r2r-callback-dialog__intro" id="r2r-callback-description">Share your number and we’ll prepare a callback request for you to send on WhatsApp.</p>
+    <p class="r2r-callback-dialog__intro" id="r2r-callback-description">Leave your contact details and our team will follow up by phone.</p>
     <form class="r2r-callback-form" id="r2r-callback-form">
       <div class="r2r-callback-form__field">
         <label for="r2r-callback-name">Your name *</label>
-        <input id="r2r-callback-name" name="name" autocomplete="name" required>
+        <input id="r2r-callback-name" name="name" autocomplete="name" maxlength="80" required>
       </div>
       <div class="r2r-callback-form__field">
         <label for="r2r-callback-phone"><i class="bx bx-phone bx-ui-icon" aria-hidden="true"></i> Phone number *</label>
-        <input id="r2r-callback-phone" name="phone" type="tel" autocomplete="tel" required>
+        <input id="r2r-callback-phone" name="phone" type="tel" autocomplete="tel" minlength="7" maxlength="20" required>
       </div>
       <div class="r2r-callback-form__field">
         <label for="r2r-callback-time">Best time to call</label>
@@ -214,11 +215,12 @@
       </div>
       <div class="r2r-callback-form__field">
         <label for="r2r-callback-trip">Package or destination (optional)</label>
-        <input id="r2r-callback-trip" name="trip" placeholder="e.g. Kashmir group tour">
+        <input id="r2r-callback-trip" name="trip" maxlength="120" placeholder="e.g. Kashmir group tour">
       </div>
-      <button class="r2r-callback-form__submit" type="submit">Continue to WhatsApp</button>
+      <button class="r2r-callback-form__submit" type="submit">Request a callback</button>
     </form>
-    <p class="r2r-callback-dialog__note">WhatsApp opens with your request for review. Your details are shared only if you send the message.</p>
+    <p class="r2r-callback-dialog__status" role="status" aria-live="polite"></p>
+    <p class="r2r-callback-dialog__note">Your details are saved so our team can follow up on your request.</p>
   </dialog>
   <script src="assets/floating-contact.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>

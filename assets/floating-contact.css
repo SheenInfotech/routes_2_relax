@@ -2,10 +2,12 @@
   position: fixed;
   z-index: 90;
   right: 18px;
-  bottom: 18px;
+  top: 50%;
+  bottom: auto;
   display: flex;
   flex-direction: column;
   gap: 10px;
+  transform: translateY(-50%);
 }
 
 .r2r-floating-contact__button {
@@ -170,10 +172,33 @@
   line-height: 1.55;
 }
 
+.r2r-callback-dialog__status {
+  margin: 12px 0 0;
+  color: #237260;
+  font-size: 11px;
+  line-height: 1.55;
+}
+
+.r2r-callback-dialog__status.is-error {
+  color: #a83b32;
+}
+
+.r2r-callback-dialog__status a {
+  color: inherit;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.r2r-callback-form__submit:disabled {
+  cursor: wait;
+  opacity: .7;
+}
+
 @media (max-width: 480px) {
   .r2r-floating-contact {
     right: 10px;
-    bottom: 12px;
+    top: 50%;
+    bottom: auto;
     gap: 8px;
   }
 
